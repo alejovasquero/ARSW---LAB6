@@ -10,8 +10,8 @@ var app = (function (){
 
     var seekerButton ="<td><button type='button' class='seeker'>"
                       					+ "Get Functions</button></td>"
-    var widht = 100;
-    var height = 100;
+    var widht = 70;
+    var height = 70;
     var space = 3;
     var callback = function (param){
 
@@ -76,7 +76,7 @@ var app = (function (){
             row.forEach(function(coll){
                 console.log(coll);
                 // Create gradient
-                var grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+                var grd = ctx.createRadialGradient(55, 50, 5, 70, 30, 80);
                 grd.addColorStop(0, coll===true ? "green": "red");
                 // Fill with gradient
                 ctx.fillStyle = grd;

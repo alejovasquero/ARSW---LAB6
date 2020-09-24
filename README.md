@@ -4,6 +4,12 @@
 
 Estas instrucciones se utilizan para compilación, ejecución de pruebas y pruebas de aceptación.
 
+## Funcionalidades
+
+Se despliega un cliente pesado en spring para que pueda acceder a consultar las funciones de un cinema y la fecha de las funciones.
+
+![](/img/web.JPG)
+
 ### Prerrequisitos 
 
 Para instalar y correr exitosamente este proyecto necesitamos:
