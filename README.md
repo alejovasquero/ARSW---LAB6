@@ -1,4 +1,4 @@
-# Laboratorio 5 - Clientes pesados
+# Laboratorio 6 - Clientes pesados II
 
 ## Empezando
 
@@ -7,8 +7,6 @@ Estas instrucciones se utilizan para compilación, ejecución de pruebas y prueb
 ## Funcionalidades
 
 Se despliega un cliente pesado en spring para que pueda acceder a consultar las funciones de un cinema y la fecha de las funciones.
-
-![](/img/web.JPG)
 
 ### Prerrequisitos 
 
@@ -23,13 +21,13 @@ Primeramente vamos a descargar el repositorio en nuestra máquina local, y en la
 nuestra preferencia. En consola vamos a digitar el siguiente comando para clonar el repositorio.
 
 ```console
-git clone https://github.com/alejovasquero/ARSW---LAB5
+git clone https://github.com/alejovasquero/ARSW---LAB6
 ```
 
 Entremos a el directorio del proyecto
 
 ```console
-cd ARSW---LAB5
+cd ARSW---LAB6
 ```
 
 Debemos compilar el proyecto, que contiene las clases necesarias para poder correr nuestro
