@@ -8,6 +8,7 @@
 		<script src="/webjars/jquery/jquery.min.js"></script>
 		<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/index.css" />
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
 			integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -55,12 +56,31 @@
 			</table>
 		</div>
 
-		<div id="divCheckbox" class="grid-item">
-			<h2>Availability</h2>
-			<h3 id="function"> </h3>
-			<div class="grid=item">
-				<canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
+		<div id="divCheckbox" class="grid-item" style="display: none; border-style: solid">
+			<div style="text-align:center">
+				<h2>Availability</h2>
+				<h3 id="function"></h3>
 			</div>
+			<div class="grid=item">
+				<canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000; text-align:center"></canvas>
+			</div>
+			<div class="grid-item admin">
+				<br></br>
+				<H2>Administrator mode</H2>
+				<div class="grid-item console">
+					<a>Edit function</a>
+					<input id="updateDate" placeholder="new Hour"></input>
+					<button onclick="app.updateFunction(document.getElementById('updateDate').value)">Save/Update</button>
+				</div>
+
+				<div class="grid-item console">
+					<br></br>
+					<button onclick="console.log('OK')">Create new function</button>
+					<button onclick="console.log('OK')">Delete function</button>
+					<br></br>
+				</div>
+			</div>
+
 		</div>
 	</div>
 

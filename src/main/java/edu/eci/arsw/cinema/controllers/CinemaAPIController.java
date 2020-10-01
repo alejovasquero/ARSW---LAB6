@@ -91,6 +91,26 @@ public class CinemaAPIController {
         }
     }
 
+    @PutMapping(value = "/{name}/{date}/{moviename}")
+    public ResponseEntity<?> updateFunction(
+            @PathVariable String name, @PathVariable("date") String fecha, @PathVariable String moviename, @RequestBody String upate){
+        try {
+            System.out.println(upate);
+            CinemaFunction a = cinemaServices.getFunctionbyCinemaDateAndMovie(name, fecha, moviename);
+            System.out.println(a.getDate());
+            ObjectReader reader = objectMapper.readerForUpdating(a);
+            reader.readValue(upate);
+            System.out.println(a.getDate());
+            return new ResponseEntity<>("HTTP 200 OK",HttpStatus.OK);
+        } catch (CinemaException e){
+            Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>("HTTP 404 Not Found",HttpStatus.NOT_FOUND);
+        } catch (IOException e ){
+            Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>("HTTP 400 Bad Request",HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @RequestMapping(value="/{name}", method = RequestMethod.POST)
     public ResponseEntity<?> controladorNuevoCinema(@RequestBody String body, @PathVariable String name){
         try {

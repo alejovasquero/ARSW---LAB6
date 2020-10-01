@@ -7,6 +7,7 @@ var app = (function (){
     var cinema = [];
 
     var movieName = "";
+    var currentDate = "";
 
     var seekerButton ="<td><button type='button' class='seeker'>"
                       					+ "Get Functions</button></td>"
@@ -14,7 +15,7 @@ var app = (function (){
     var height = 70;
     var space = 3;
     var callback = function (param){
-
+        console.log("2")
         if(param==undefined){
             alert("Cinema no existe o datos invalidos");
             return;
@@ -102,6 +103,28 @@ var app = (function (){
     }
 
 
+    var updateFunctionPut = function(nuevaFecha){
+        console.log("LOCURA")
+        var jsonu = {
+            "date": nuevaFecha
+        }
+        var put =  $.ajax({
+            url: "/cinemas/"+ name + "/"+currentDate + "/" + movieName,
+            type: 'PUT',
+            data: JSON.stringify(jsonu),
+            contentType: "application/json",
+            success: function(data){
+                console.log(data)
+                console.log("1")
+            }
+        });
+        return put;
+    }
+
+    var getFunction = function(){
+        app.setFuntionsByNameAndDate(name, fecha);
+    }
+
     return {
         setNameCinema : function (newName){
             name=newName;
@@ -119,9 +142,23 @@ var app = (function (){
         },
         setFunctionByNameDateMovie: function(cinema, date, movie){
             movieName = movie;
+            currentDate = date;
+            name = cinema;
             $('#function').text(movie);
             REPOSITORY.getFunctionsByCinemaAndDate(cinema, date, setFunction);
         },
+
+        getCurrentCinema: function(){
+            return name;
+        },
+
+        updateFunction: function(newDate){
+            console.log()
+            $('#divCheckbox').hide();
+            console.log(newDate);
+            updateFunctionPut(newDate)
+            .then(getFunction);
+        }
     };
 
 })();

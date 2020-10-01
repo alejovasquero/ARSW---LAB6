@@ -19,6 +19,7 @@ apiclient = (function(){
                     })
                 } else {
                     $.getJSON('/cinemas/'+cinema_name+'/'+fdate, function(response){
+                        console.log("HPT");
                         callback(response);
                     }).fail(function() {
                         callback(undefined);
