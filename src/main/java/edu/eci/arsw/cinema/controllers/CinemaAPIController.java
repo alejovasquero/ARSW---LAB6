@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import edu.eci.arsw.cinema.model.Cinema;
 import edu.eci.arsw.cinema.model.CinemaFunction;
 import edu.eci.arsw.cinema.persistence.CinemaException;
+import edu.eci.arsw.cinema.persistence.CinemaPersistenceException;
 import edu.eci.arsw.cinema.services.CinemaServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -145,6 +146,19 @@ public class CinemaAPIController {
         } catch (IOException ex) {
             Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("HTTP 403 Forbidden",HttpStatus.FORBIDDEN);
+        }
+    }
+
+
+    @DeleteMapping(value = "/{name}/{date}/{moviename}")
+    public ResponseEntity<?> deleteFunction(
+            @PathVariable String name, @PathVariable String date, @PathVariable String moviename){
+        try {
+            cinemaServices.deleteFunctionByNameAndDate(name, date, moviename);
+            return new ResponseEntity<>("HTTP 404 Not Found",HttpStatus.OK);
+        } catch (CinemaPersistenceException e) {
+            Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>("HTTP 404 Not Found",HttpStatus.NOT_FOUND);
         }
     }
 

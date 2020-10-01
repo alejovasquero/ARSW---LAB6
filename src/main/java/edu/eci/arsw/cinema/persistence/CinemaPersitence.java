@@ -82,4 +82,12 @@ public interface CinemaPersitence {
      * @param name Name of the cinema
      */
 	public void removeCinema(String name) ;
+
+    /**
+     * Deletes the function with the specified parameters
+     * @param cinema Name of the cinema
+     * @param date Date of the function
+     * @param movie Name of the movie
+     */
+	public void deleteFunctionByCinemaDateAndMovie(String cinema, String date, String movie) throws CinemaPersistenceException;
 }

@@ -123,4 +123,8 @@ public class CinemaServices {
     public void removeCinema(String name){
         cps.removeCinema(name);
     }
+
+    public void deleteFunctionByNameAndDate(String cinema, String date, String movie) throws CinemaPersistenceException {
+        cps.deleteFunctionByCinemaDateAndMovie(cinema, date, movie);
+    }
 }

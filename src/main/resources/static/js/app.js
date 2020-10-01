@@ -125,6 +125,18 @@ var app = (function (){
         app.setFuntionsByNameAndDate(name, fecha);
     }
 
+    var deleteFunction = function(){
+        var del =  $.ajax({
+            url: "/cinemas/"+ name + "/"+currentDate + "/" + movieName,
+            type: 'DELETE',
+            success: function(data){
+                console.log(data)
+                console.log("1")
+            }
+        });
+        return del;
+    }
+
     return {
         setNameCinema : function (newName){
             name=newName;
@@ -158,6 +170,14 @@ var app = (function (){
             console.log(newDate);
             updateFunctionPut(newDate)
             .then(getFunction);
+        },
+
+        deleteCurrentFunction: function(){
+            $('#divCheckbox').hide();
+            deleteFunction().then(
+                getFunction
+            );
+
         }
     };
 

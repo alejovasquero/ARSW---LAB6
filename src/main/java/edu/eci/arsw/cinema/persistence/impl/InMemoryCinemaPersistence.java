@@ -149,4 +149,14 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
         cinemas.remove(name);
     }
 
+    @Override
+    public void deleteFunctionByCinemaDateAndMovie(String cinema, String date, String movie) throws CinemaPersistenceException {
+        if (cinemas.containsKey(cinema)) {
+            cinemas.get(cinema).getFunctions().
+                    removeIf(p -> p.getDate().equals(date) && p.getMovie().getName().equals(movie));
+        } else {
+            throw new CinemaPersistenceException("El cinema especificado no existe");
+        }
+    }
+
 }
