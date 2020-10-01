@@ -65,6 +65,13 @@ public interface CinemaPersitence {
     
     /**
      * 
+     * @param cinema new Function
+     * @throws  CinemaPersistenceException n if a cinema function with the same name already exists
+     */
+    public void saveCinemaFunction(String cinema,CinemaFunction cFunction) throws CinemaPersistenceException;
+    
+    /**
+     * 
      * @param name name of the cinema
      * @return Cinema of the given name
      * @throws  CinemaPersistenceException if there is no such cinema
@@ -82,4 +89,12 @@ public interface CinemaPersitence {
      * @param name Name of the cinema
      */
 	public void removeCinema(String name) ;
+
+    /**
+     * Deletes the function with the specified parameters
+     * @param cinema Name of the cinema
+     * @param date Date of the function
+     * @param movie Name of the movie
+     */
+	public void deleteFunctionByCinemaDateAndMovie(String cinema, String date, String movie) throws CinemaPersistenceException;
 }

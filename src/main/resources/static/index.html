@@ -75,8 +75,13 @@
 
 				<div class="grid-item console">
 					<br></br>
-					<button onclick="console.log('OK')">Create new function</button>
-					<button onclick="console.log('OK')">Delete function</button>
+					<input id="newMovie" placeholder="new Movie"></input>
+					<input id="newDate" placeholder="new Date"></input>
+					<input id="newGenre" placeholder="new Genre"></input>
+					<button onclick="app.createFunction(document.getElementById('newMovie').value,
+														document.getElementById('newDate').value,
+														document.getElementById('newGenre').value)">Create new function</button>
+					<button onclick="app.deleteCurrentFunction()">Delete function</button>
 					<br></br>
 				</div>
 			</div>

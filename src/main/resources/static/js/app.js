@@ -99,9 +99,7 @@ var app = (function (){
             console.log(movieSelected[0]['seats']);
             drawFunction(movieSelected[0]['seats']);
         }
-
     }
-
 
     var updateFunctionPut = function(nuevaFecha){
         console.log("LOCURA")
@@ -121,14 +119,17 @@ var app = (function (){
         return put;
     }
 
-    var createFunctionPost = function(nuevaFecha,nuevaFuncion){
+    var createFunctionPost = function(newMovie,newDate,newGenre){
         console.log("nueva")
+        console.log(newMovie)
+        console.log(newDate)
+        console.log(newGenre)
         var jsonu = {
-            "date": nuevaFecha
+            "name": newMovie,
+            "genre": newGenre
         }
-        var cinemaFun = nuevaFuncion;
         var post =  $.ajax({
-            url: "/cinemas/"+ name + "/"+currentDate + "/" + movieName,
+            url: "/cinemas/"+ name + "/" + newDate,
             type: 'POST',
             data: JSON.stringify(jsonu),
             contentType: "application/json",
@@ -142,6 +143,18 @@ var app = (function (){
 
     var getFunction = function(){
         app.setFuntionsByNameAndDate(name, fecha);
+    }
+
+    var deleteFunction = function(){
+        var del =  $.ajax({
+            url: "/cinemas/"+ name + "/"+currentDate + "/" + movieName,
+            type: 'DELETE',
+            success: function(data){
+                console.log(data)
+                console.log("1")
+            }
+        });
+        return del;
     }
 
     return {
@@ -179,12 +192,18 @@ var app = (function (){
             .then(getFunction);
         },
 
-        createFunction: function(newDate,newFunction){
+        createFunction: function(newMovie,newDate,newGenre){
             console.log()
             $('#divCheckbox').hide();
-            console.log(newDate);
-            createFunctionPost(newDate)
+            createFunctionPost(newMovie,newDate,newGenre)
             .then(getFunction);
+        },
+
+        deleteCurrentFunction: function(){
+            $('#divCheckbox').hide();
+            deleteFunction().then(
+                getFunction
+            );
         }
     };
 

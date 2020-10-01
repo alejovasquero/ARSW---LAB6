@@ -123,4 +123,16 @@ public class CinemaServices {
     public void removeCinema(String name){
         cps.removeCinema(name);
     }
+
+    public void addFuncion(String cinema,CinemaFunction cFunction) throws CinemaException {
+        try {
+            cps.saveCinemaFunction(cinema,cFunction);
+        } catch (CinemaPersistenceException e) {
+            throw new CinemaException("Error al insertar la funcion");
+        }
+    }
+
+    public void deleteFunctionByNameAndDate(String cinema, String date, String movie) throws CinemaPersistenceException {
+        cps.deleteFunctionByCinemaDateAndMovie(cinema, date, movie);
+    }
 }

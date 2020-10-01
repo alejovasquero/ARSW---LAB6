@@ -17,7 +17,9 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import edu.eci.arsw.cinema.model.Cinema;
 import edu.eci.arsw.cinema.model.CinemaFunction;
+import edu.eci.arsw.cinema.model.Movie;
 import edu.eci.arsw.cinema.persistence.CinemaException;
+import edu.eci.arsw.cinema.persistence.CinemaPersistenceException;
 import edu.eci.arsw.cinema.services.CinemaServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -130,6 +132,24 @@ public class CinemaAPIController {
         }
     }
 
+    @RequestMapping(value="/{name}/{ndate}", method = RequestMethod.POST)
+    public ResponseEntity<?> controladorNuevaFuncion(@RequestBody String body, @PathVariable String name, @PathVariable("ndate") String ndate){
+        try {
+            JsonNode root = objectMapper.readTree(body);
+            System.out.println(body);
+            Movie nuevo = objectMapper.readValue(body, Movie.class);
+            CinemaFunction cFunction = new CinemaFunction(nuevo, ndate);
+            cinemaServices.addFuncion(name,cFunction);
+            return new ResponseEntity<>("HTTP 201 Created",HttpStatus.CREATED);
+        } catch (IOException ex){
+            Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("HTTP 400 Bad Request",HttpStatus.BAD_REQUEST);
+        } catch (CinemaException ex) {
+            Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("HTTP 403 Forbidden",HttpStatus.FORBIDDEN);
+        }
+    }
+
 
     @RequestMapping(value="/{name}", method = RequestMethod.PUT)
     public ResponseEntity<?>  manejadorUpdateCinema(@RequestBody String body, @PathVariable String name){
@@ -145,6 +165,19 @@ public class CinemaAPIController {
         } catch (IOException ex) {
             Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("HTTP 403 Forbidden",HttpStatus.FORBIDDEN);
+        }
+    }
+
+
+    @DeleteMapping(value = "/{name}/{date}/{moviename}")
+    public ResponseEntity<?> deleteFunction(
+            @PathVariable String name, @PathVariable String date, @PathVariable String moviename){
+        try {
+            cinemaServices.deleteFunctionByNameAndDate(name, date, moviename);
+            return new ResponseEntity<>("HTTP 404 Not Found",HttpStatus.OK);
+        } catch (CinemaPersistenceException e) {
+            Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>("HTTP 404 Not Found",HttpStatus.NOT_FOUND);
         }
     }
 

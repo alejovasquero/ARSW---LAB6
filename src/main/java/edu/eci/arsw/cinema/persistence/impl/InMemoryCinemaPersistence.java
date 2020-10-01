@@ -129,6 +129,16 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
     }
 
     @Override
+    public void saveCinemaFunction(String cinema,CinemaFunction cFunction) throws CinemaPersistenceException {
+        if (!cinemas.containsKey(cinema)||cinemas.get(cinema).getFunctions().contains(cFunction)) {
+            throw new CinemaPersistenceException("The given Function already exists or cinema doesn't exists: " + cFunction.getMovie().getName());
+        } else {
+            getCinema(cinema).getFunctions().add(cFunction);
+        }
+
+    }
+
+    @Override
     public Cinema getCinema(String name) throws CinemaPersistenceException {
         if(cinemas.containsKey(name)){
             return cinemas.get(name);
@@ -148,5 +158,17 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
     public void removeCinema(String name){
         cinemas.remove(name);
     }
+
+    @Override
+    public void deleteFunctionByCinemaDateAndMovie(String cinema, String date, String movie) throws CinemaPersistenceException {
+        if (cinemas.containsKey(cinema)) {
+            cinemas.get(cinema).getFunctions().
+                    removeIf(p -> p.getDate().equals(date) && p.getMovie().getName().equals(movie));
+        } else {
+            throw new CinemaPersistenceException("El cinema especificado no existe");
+        }
+    }
+
+    
 
 }
