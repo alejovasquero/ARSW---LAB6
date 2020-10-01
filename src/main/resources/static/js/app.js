@@ -121,6 +121,25 @@ var app = (function (){
         return put;
     }
 
+    var createFunctionPost = function(nuevaFecha,nuevaFuncion){
+        console.log("nueva")
+        var jsonu = {
+            "date": nuevaFecha
+        }
+        var cinemaFun = nuevaFuncion;
+        var post =  $.ajax({
+            url: "/cinemas/"+ name + "/"+currentDate + "/" + movieName,
+            type: 'POST',
+            data: JSON.stringify(jsonu),
+            contentType: "application/json",
+            success: function(data){
+                console.log(data)
+                console.log("1")
+            }
+        });
+        return post;
+    }
+
     var getFunction = function(){
         app.setFuntionsByNameAndDate(name, fecha);
     }
@@ -157,6 +176,14 @@ var app = (function (){
             $('#divCheckbox').hide();
             console.log(newDate);
             updateFunctionPut(newDate)
+            .then(getFunction);
+        },
+
+        createFunction: function(newDate,newFunction){
+            console.log()
+            $('#divCheckbox').hide();
+            console.log(newDate);
+            createFunctionPost(newDate)
             .then(getFunction);
         }
     };
